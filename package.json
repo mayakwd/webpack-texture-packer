@@ -1,7 +1,7 @@
 {
   "name": "webpack-texture-packer",
-  "version": "1.0.0",
-  "main": "index.js",
+  "version": "0.0.0",
+  "main": "dist/index.js",
   "license": "MIT",
   "author": {
     "name": "Ilya Malanin",
@@ -9,6 +9,7 @@
   },
   "homepage": "https://github.com/mayakwd/webpack-texture-packer",
   "scripts": {
+    "setup": "yarn install",
     "build": "tsc",
     "lint": "yarn tslint --fix -c ./tslint.json 'src/**/*.ts'",
     "test": "jest"
@@ -34,5 +35,11 @@
   },
   "peerDependencies": {
     "webpack": "^4.3.7"
-  }
+  },
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ]
 }
