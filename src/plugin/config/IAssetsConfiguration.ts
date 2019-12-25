@@ -1,4 +1,4 @@
-import {ITexturePackerOptions} from "../..";
+import {TexturePackerOptions} from "../..";
 import {IAtlasConfiguration} from "./IAtlasConfiguration";
 
 export interface IAssetsConfiguration {
@@ -29,5 +29,5 @@ export interface IAssetsConfiguration {
    * @see ITexturePackerOptions
    * @see defaultTexturePackerOptions
    */
-  packerOptions?: ITexturePackerOptions;
+  packerOptions?: TexturePackerOptions;
 }

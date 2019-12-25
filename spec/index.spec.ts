@@ -1,43 +1,58 @@
 import * as fs from "fs";
 import * as path from "path";
 import {Stats} from "webpack";
+import {PackerExporterType, ScaleMethod, WebpackTexturePackerPlugin} from "../src";
+import {IAssetsConfiguration} from "../src/plugin/config/IAssetsConfiguration";
 import webpack = require("webpack");
-import {PackerExporterType, WebpackTexturePackerPlugin} from "../src";
 
 jest.setTimeout(30000);
 
-describe("plugin tests", () => {
-  it("running", (done) => {
-    const assetsConfiguration = {
-      rootDir: path.join(__dirname, "fixtures/simple/assets"),
-      items: [
+const assetsConfiguration: IAssetsConfiguration = {
+  rootDir: path.join(__dirname, "fixtures/simple/assets"),
+  items: [
+    {
+      outDir: "assets/atlases",
+      name: "enemies",
+      source: "enemies",
+      packerOptions: {
+        scale: 2,
+        scaleMethod: ScaleMethod.NEAREST_NEIGHBOR,
+        exporter: PackerExporterType.PIXI,
+        removeFileExtension: true,
+      },
+      overwrite: false,
+    },
+    {
+      name: "environment",
+      outDir: "assets/atlases",
+      source: [
         {
-          outDir: "assets/atlases",
-          name: "enemies",
-          source: "enemies",
-          packerOptions: {exporter: PackerExporterType.PIXI, removeFileExtension: true},
+          path: "environment",
         },
         {
-          name: "environment",
-          outDir: "assets/atlases",
-          source: [
-            {
-              path: "environment",
-            },
-            {
-              path: "weapons",
-              exclude: "weapon_r*",
-              recursive: true,
-            },
-          ],
-        },
-        {
-          rootDir: "ui",
-          name: "ui",
-          outDir: "assets/ui",
+          path: "weapons",
+          exclude: "weapon_r*",
+          recursive: true,
         },
       ],
-    };
+      packerOptions: {
+        scale: 0.75,
+        scaleMethod: ScaleMethod.BEZIER,
+      },
+    },
+    {
+      rootDir: "ui",
+      name: "ui",
+      outDir: "assets/ui",
+      packerOptions: {
+        scale: 4,
+        scaleMethod: ScaleMethod.NEAREST_NEIGHBOR,
+      },
+    },
+  ],
+};
+describe("plugin tests", () => {
+  it("running", (done) => {
     const webpackOutDir = path.join(__dirname, "temp");
     webpack({
         mode: "production",
@@ -53,8 +68,8 @@ describe("plugin tests", () => {
           .toBeNull();
         for (const atlas of assetsConfiguration.items) {
           const {name, outDir} = atlas;
-          expect(fs.existsSync(path.join(webpackOutDir, outDir, name + ".png"))).toBeTruthy();
-          expect(fs.existsSync(path.join(webpackOutDir, outDir, name + ".json"))).toBeTruthy();
+          expect(fs.existsSync(path.join(webpackOutDir, outDir!, name + ".png"))).toBeTruthy();
+          expect(fs.existsSync(path.join(webpackOutDir, outDir!, name + ".json"))).toBeTruthy();
         }
         done();
       });

@@ -1,8 +1,8 @@
 /**
  * Trim mode for sprites
  *
- * @see ITexturePackerOptions.trimMode
- * @see ITexturePackerOptions.allowTrim
+ * @see TexturePackerOptions.trimMode
+ * @see TexturePackerOptions.allowTrim
  */
 export enum TrimMode {
   /**
@@ -26,7 +26,7 @@ export enum TrimMode {
 /**
  * Output atlas texture format
  *
- * @see ITexturePackerOptions.textureFormat
+ * @see TexturePackerOptions.textureFormat
  */
 export enum TextureFormat {
   PNG = "png",
@@ -37,8 +37,8 @@ export enum TextureFormat {
  * Atlas packer type.
  * There are two implementations which could be used
  *
- * @see ITexturePackerOptions.packer
- * @see ITexturePackerOptions.packerMethod
+ * @see TexturePackerOptions.packer
+ * @see TexturePackerOptions.packerMethod
  * @see MaxRectsBinMethod
  * @see MaxRectsPackerMethod
  */
@@ -50,7 +50,7 @@ export enum PackerType {
 /**
  * MaxRectsBin packer method
  *
- * @see ITexturePackerOptions.packerMethod
+ * @see TexturePackerOptions.packerMethod
  */
 export enum MaxRectsBinMethod {
   BEST_SHORT_SIDE_FIT = "BestShortSideFit",
@@ -63,7 +63,7 @@ export enum MaxRectsBinMethod {
 /**
  * MaxRectsPacker packer method
  *
- * @see ITexturePackerOptions.packerMethod
+ * @see TexturePackerOptions.packerMethod
  */
 export enum MaxRectsPackerMethod {
   SMART = "Smart",
@@ -76,7 +76,7 @@ export enum MaxRectsPackerMethod {
  * Predefined exporter types (supported popular formats)
  * Instead of predefined type you could use custom exporter
  *
- * @see ITexturePackerOptions.exporter
+ * @see TexturePackerOptions.exporter
  * @see IPackerExporter
  */
 export enum PackerExporterType {
@@ -100,7 +100,7 @@ export enum PackerExporterType {
 /**
  * Bitmap filter, applicable to output atlas texture
  *
- * @see ITexturePackerOptions.filter
+ * @see TexturePackerOptions.filter
  */
 export enum BitmapFilterType {
   GRAYSCALE = "grayscale",
@@ -111,7 +111,7 @@ export enum BitmapFilterType {
 /**
  * Texture packer options
  */
-export interface ITexturePackerOptions {
+export interface TexturePackerOptions {
   /**
    * Name of output files.
    *
@@ -218,6 +218,12 @@ export interface ITexturePackerOptions {
    */
   scale?: number;
   /**
+   * Texture scaling method
+   *
+   * @default ScaleMethod.BILINEAR
+   */
+  scaleMethod?: ScaleMethod;
+  /**
    * "Tinify" texture using TinyPNG
    *
    * @default false
@@ -248,7 +254,7 @@ export interface ITexturePackerOptions {
    *
    * @default JsonHash
    */
-  exporter?: PackerExporterType | IPackerExporter;
+  exporter?: PackerExporterType | PackerExporter;
   /**
    * Bitmap filter type
    *
@@ -265,12 +271,19 @@ export interface ITexturePackerOptions {
   appInfo?: any;
 }
 
+export enum ScaleMethod {
+  BILINEAR = "BILINEAR",
+  NEAREST_NEIGHBOR = "NEAREST_NEIGHBOR",
+  HERMITE = "HERMITE",
+  BEZIER = "BEZIER",
+}
+
 /**
  * Texture packer uses {@link http://mustache.github.io/ | mustache} template engine.
  * Look at documentation how to create custom exporter:
  * {@link https://www.npmjs.com/package/free-tex-packer-core#custom-exporter}
  */
-export interface IPackerExporter {
+export interface PackerExporter {
   /**
    * File extension
    */

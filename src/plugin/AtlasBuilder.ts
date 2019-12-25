@@ -1,11 +1,11 @@
-import texPacker from "free-tex-packer-core";
+import {packAsync} from "free-tex-packer-core";
 import * as fs from "fs";
 import {Minimatch} from "minimatch";
 import * as path from "path";
 import {readdirAsync, Stats} from "readdir-enhanced";
 import {AssetsSource, IAssetsSourceConfiguration, IAtlasConfiguration} from "./config/IAtlasConfiguration";
 import {defaultTexturePackerOptions} from "./texture-packer/DefaultTexturePackerOptions";
-import {ITexturePackerOptions} from "./texture-packer/ITexturePackerOptions";
+import {TexturePackerOptions} from "./texture-packer/TexturePackerOptions";
 
 /** @internal */
 export class AtlasBuilder {
@@ -20,7 +20,7 @@ export class AtlasBuilder {
 
   public constructor(
     private readonly atlasConfig: IAtlasConfiguration,
-    private readonly globalPackerOptions?: ITexturePackerOptions,
+    private readonly globalPackerOptions?: TexturePackerOptions,
     globalAssetsRootDir: string = "",
   ) {
     const {rootDir = "", source = ""} = atlasConfig;
@@ -30,19 +30,17 @@ export class AtlasBuilder {
     this.assetsRootDir = path.join(globalAssetsRootDir, rootDir);
   }
 
-  public async build(): Promise<Array<{ name: string, buffer: Buffer }>> {
+  public async build(): Promise<IPackedAtlasPair[]> {
     const {source = ""} = this.atlasConfig;
     const assetsList = await this.readAssetsListFromSource(source);
     const texturePackerOptions = this.getTexturePackerOptions();
     if (assetsList.length === 0) {
       return [];
     }
-    return new Promise((resolve, reject) => texPacker(
+    return await packAsync(
       this.readFilesFromAssetsList(assetsList),
       texturePackerOptions,
-      (result: IPackedAtlasPair[], err?: Error) => {
-        if (!err) { resolve(result); } else { reject(err); }
-      }));
+    );
   }
 
   private getTexturePackerOptions() {

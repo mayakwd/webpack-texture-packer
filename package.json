@@ -1,6 +1,6 @@
 {
   "name": "webpack-texture-packer",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "license": "MIT",
@@ -16,22 +16,22 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@microsoft/tsdoc": "^0.12.14",
-    "@types/jest": "^24.0.18",
+    "@microsoft/tsdoc": "^0.12.16",
+    "@types/jest": "^24.0.24",
     "@types/minimatch": "^3.0.3",
-    "@types/node": "^12.7.2",
-    "@types/webpack": "^4.39.1",
+    "@types/node": "^13.1.0",
+    "@types/webpack": "^4.41.0",
     "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "tslint": "^5.19.0",
-    "typescript": "^3.6.4",
-    "webpack": "^4.39.2",
+    "ts-jest": "^24.2.0",
+    "tslint": "^5.20.1",
+    "typescript": "^3.7.4",
+    "webpack": "^4.41.4",
     "webpack-recompilation-simulator": "^3.0.0"
   },
   "dependencies": {
-    "free-tex-packer-core": "^0.2.4",
+    "free-tex-packer-core": "^0.2.9",
     "minimatch": "^3.0.4",
-    "readdir-enhanced": "^4.0.2",
+    "readdir-enhanced": "^5.1.1",
     "webpack-log": "^3.0.1"
   },
   "peerDependencies": {

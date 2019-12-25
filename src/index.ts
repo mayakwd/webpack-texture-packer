@@ -1,2 +1,2 @@
-export * from "./plugin/texture-packer/ITexturePackerOptions";
+export * from "./plugin/texture-packer/TexturePackerOptions";
 export * from "./plugin/WebpackTexturePackerPlugin";

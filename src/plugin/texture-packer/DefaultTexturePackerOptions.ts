@@ -1,6 +1,6 @@
-import {ITexturePackerOptions, MaxRectsPackerMethod, PackerExporterType, PackerType} from "./ITexturePackerOptions";
+import {MaxRectsPackerMethod, PackerExporterType, PackerType, TexturePackerOptions} from "./TexturePackerOptions";
 
-export const defaultTexturePackerOptions: ITexturePackerOptions = {
+export const defaultTexturePackerOptions: TexturePackerOptions = {
   fixedSize: false,
   padding: 1,
   allowRotation: true,
