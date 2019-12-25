@@ -1,4 +1,4 @@
-import {ITexturePackerOptions} from "../..";
+import {TexturePackerOptions} from "../..";
 import {IAssetsConfiguration} from "./IAssetsConfiguration";
 
 /**
@@ -56,7 +56,7 @@ export interface IAtlasConfiguration {
    * Texture packer options
    * @see ITexturePackerOptions
    */
-  packerOptions?: ITexturePackerOptions;
+  packerOptions?: TexturePackerOptions;
   /**
    * Value indicates whether overwrite global texture packer options for this atlas.
    * - If `true` - global texture packer options will be replaced
