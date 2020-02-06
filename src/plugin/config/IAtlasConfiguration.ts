@@ -64,6 +64,10 @@ export interface IAtlasConfiguration {
    * @default false
    */
   overwrite?: boolean;
+  /**
+   * Extra data which could be passed with webpack hook
+   */
+  extra?: any;
 }
 
 export type AssetsSource = string | string[] | IAssetsSourceConfiguration | IAssetsSourceConfiguration [];
