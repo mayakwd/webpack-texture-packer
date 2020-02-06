@@ -63,7 +63,7 @@ export class WebpackTexturePackerPlugin implements WebpackPluginInstance {
             };
           }
           // @ts-ignore
-          compilation.compiler.hooks.texturePackerEmitAtlas.call(atlasParts);
+          compilation.compiler.hooks.texturePackerEmitAtlas.call(atlasParts, atlasConfig.extra);
         }
         // @ts-ignore
         compilation.compiler.hooks.texturePackerEmitComplete.call();
