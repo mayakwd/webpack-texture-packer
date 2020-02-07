@@ -30,7 +30,7 @@ export class WebpackTexturePackerPlugin implements WebpackPluginInstance {
     }
 
     // @ts-ignore
-    compiler.hooks.texturePackerEmitAtlas = new SyncHook(["atlas"]);
+    compiler.hooks.texturePackerEmitAtlas = new SyncHook(["atlas", "extra"]);
     // @ts-ignore
     compiler.hooks.texturePackerEmitComplete = new SyncHook();
     compiler.hooks.beforeCompile.tapAsync(WebpackTexturePackerPlugin.PLUGIN_NAME, this.beforeCompileHook.bind(this));
