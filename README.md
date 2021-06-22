@@ -10,7 +10,7 @@ Plugin that packs your textures into atlases. Viva la GameDev!
 ## Usage
 
 ```js webpack.config.js
-const {WebpackTexturePackerPlugin, PackerExporterType} = require('WebpackTexturePackerPlugin');
+const {WebpackTexturePackerPlugin, PackerExporterType} = require('webpack-texture-packer');
 
 module.exports = {
   entry: 'index.js',
