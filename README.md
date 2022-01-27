@@ -1,7 +1,7 @@
-# Webpack texture packer plugin
+# Texture packer plugin for Webpack v5
 
-Plugin that packs your textures into atlases. Viva la GameDev! 
-
+Plugin that packs your textures into atlases. Viva la GameDev!
+ 
 ## Installation
 
 - `npm i webpack-texture-packer --save-dev`
