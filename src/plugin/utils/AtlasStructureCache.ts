@@ -1,7 +1,5 @@
-import * as Buffer from "buffer";
 import findCacheDir from "find-cache-dir";
 import os from "os";
-import path from "path";
 import {Compilation, WebpackError} from "webpack";
 import {AtlasStructure, IAtlasPair, IAtlasStructure} from "../AtlasStructure";
 import {WebpackTexturePackerPlugin} from "../WebpackTexturePackerPlugin";
@@ -92,7 +90,7 @@ export class AtlasStructureCache {
     const logger = compiler.getInfrastructureLogger(WebpackTexturePackerPlugin.PLUGIN_NAME);
     const cache = compilation.getCache(WebpackTexturePackerPlugin.PLUGIN_NAME);
     try {
-      await cache.storePromise(this.name + ".hash", null, JSON.stringify(this.hash));
+      await cache.storePromise(this.name + ".hash", null, Buffer.from(JSON.stringify(this.hash)));
     } catch (e) {
       logger.warn("Failed to save cache", e);
     }
