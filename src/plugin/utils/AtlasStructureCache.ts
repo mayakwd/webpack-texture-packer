@@ -45,11 +45,21 @@ export class AtlasStructureCache {
     const cache = compilation.getCache(WebpackTexturePackerPlugin.PLUGIN_NAME);
 
     let data: Record<string, IAtlasStructure> | undefined;
+    let configBuffer:Buffer;
     try {
-      data = JSON.parse(await cache.getPromise( this.name + ".hash", null));
+      configBuffer = await cache.getPromise( this.name + ".hash", null)
     } catch (e) {
       compilation.warnings.push(e as WebpackError);
       logger.warn("Cache loading failed", e);
+      return;
+    }
+    try {
+      if (configBuffer !== undefined && configBuffer.length > 0) {
+        data = JSON.parse(configBuffer.toString());
+      }
+    }
+    catch(e) {
+      logger.warn("Cache corrupted, will be rebuilt");
       return;
     }
 
