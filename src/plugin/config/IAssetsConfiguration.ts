@@ -30,4 +30,10 @@ export interface IAssetsConfiguration {
    * @see defaultTexturePackerOptions
    */
   packerOptions?: TexturePackerOptions;
+
+  /**
+   * Use cache for built atlases. Improves build time for non-changed atlases
+   * @default true
+   */
+  useCache?: boolean;
 }
