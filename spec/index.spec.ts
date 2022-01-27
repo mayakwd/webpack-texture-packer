@@ -1,6 +1,5 @@
 import * as fs from "fs";
 import * as path from "path";
-import {Stats} from "webpack";
 import {PackerExporterType, ScaleMethod, WebpackTexturePackerPlugin} from "../src";
 import {IAssetsConfiguration} from "../src/plugin/config/IAssetsConfiguration";
 import webpack = require("webpack");
@@ -56,6 +55,7 @@ describe("plugin tests", () => {
     const webpackOutDir = path.join(__dirname, "temp");
     webpack({
         mode: "production",
+        cache: { type: 'filesystem' },
         entry: path.join(__dirname, "fixtures/index.js"),
         output: {
           path: webpackOutDir,
@@ -63,8 +63,8 @@ describe("plugin tests", () => {
         },
         plugins: [new WebpackTexturePackerPlugin(assetsConfiguration)],
       },
-      (error: Error, stats: Stats) => {
-        expect(error)
+      (error?: Error) => {
+      expect(error)
           .toBeNull();
         for (const atlas of assetsConfiguration.items) {
           const {name, outDir} = atlas;
