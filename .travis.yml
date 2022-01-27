@@ -21,7 +21,7 @@ deploy:
     api_key: $GITHUB_TOKEN
     file_glob: true
     file: "webpack-texture-packer-*.tgz"
-    skip_cleanup: true
+    cleanup: false
     on:
       tags: true
   - provider: npm
